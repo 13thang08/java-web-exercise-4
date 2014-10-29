@@ -7,6 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.css">
+<script src="bootstrap-3.2.0-dist/js/bootstrap.js"></script>
 <title>会員登録</title>
 </head>
 <body>
@@ -59,25 +62,31 @@ session.invalidate();
 %>
 
 
-<form action='Register.jsp' method='post'>
-	名前：
-	<input type='text' name='name' value='<%= name %>'>
+<form role="form" action='Register.jsp' method='post'>
+
+	<div class="control-group">
+	<label class="control-label" >名前</label>
+	<input type='text' name='name' value='<%= name %>' class="input-xlarge">
 	<% 
 		if (state == "ERROR" && !nameError.equals("")) {
 			out.print(nameError);
 		}
 	%>
-	<br> <br>
-	年齢： <input type='text' name='yearold' value="<%= yearold %>"> 
+	</div>
+		
+	<div class="control-group">
+	<label class="control-label">年齢</label>
+	<input type='text' name='yearold' value="<%= yearold %>" class="input-xlagrge"> 
 	<% 
 		if (state == "ERROR" && !yearoldError.equals("")) {
 			out.print(yearoldError);
 		}
 	%>
+	</div>
 
-	<br> <br>
-	年：
-	<select name = 'year'>
+	<div class="control-group">
+	<label class="control-label">年</label>
+	<select name = 'year' class="selectpicker">
 		<% for (int i = 1970; i <= 2007; i++) {
 			if (Integer.parseInt(year) == i) {
 				out.print("<option selected value = " + i +">" + i + "</option>");
@@ -86,8 +95,9 @@ session.invalidate();
 			}
 		}%>
 	</select> 
-	月：
-	<select name = 'month'>
+	
+	<label class="control-labe">月</label>
+	<select name = 'month' class="selectpicker">
 		<% for (int i = 1; i <= 12; i++) {
 			if (Integer.parseInt(month) == i) {
 				out.print("<option selected value = " + i +">" + i + "</option>");
@@ -97,8 +107,9 @@ session.invalidate();
 
 		}%>
 	</select>
-	 日：
-	<select name = 'day'>
+	 
+	<label class="control-label">日</label>
+	<select name = 'day' class="selectpicker">
 	<% for (int i = 1; i <= 31; i++) {
 		if (Integer.parseInt(day) == i) {
 			out.print("<option selected value = " + i +">" + i + "</option>");
@@ -113,20 +124,24 @@ session.invalidate();
 			out.print(dateError);
 		}
 	%>
+	</div>
 
-	<br> <br>
-	 メールアドレス： <input type = 'text' name = 'mailAddress' value="<%= mailAddress%>"> 
+	<div class="control-group">
+	<label class="control-label">メールアドレス</label>
+	<input type = 'text' name = 'mailAddress' value="<%= mailAddress%>" class="input-xlarge"> 
 	<% 
 		if (state == "ERROR" && !mailMagazineError.equals("")) {
 			out.print(mailMagazineError);
 		}
 	%>
+	</div>
 	
-	<br> <br>
-	メルマガ: 
-	<input type = 'radio' name = 'mailMagazine' value = 'true' <% if(mailMagazine.equals("true")) out.print("checked"); %>> 必要
-	<input type = 'radio' name = 'mailMagazine' value = 'false' <% if(mailMagazine.equals("false")) out.print("checked"); %>> 不要 <br>
-	<input type = 'submit'>
+	<div class="control-group">
+	<label class="control-label">メルマガ</label>
+	<label class="radio-inline"><input type = 'radio' name = 'mailMagazine' value = 'true' <% if(mailMagazine.equals("true")) out.print("checked"); %>>必要</label>
+	<label class="radio-inline"><input type = 'radio' name = 'mailMagazine' value = 'false' <% if(mailMagazine.equals("false")) out.print("checked"); %>>不要</label>
+	</div>
+	<input type = 'submit' class="btn btn-default btn-xs">
 </form>
 
 <jsp:include page="Footer.jsp"/>
