@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -62,30 +62,34 @@ session.invalidate();
 %>
 
 
-<form role="form" action='Register.jsp' method='post'>
-
-	<div class="control-group">
-	<label class="control-label" >名前</label>
-	<input type='text' name='name' value='<%= name %>' class="input-xlarge">
+<form class="form-horizontal" role="form" action='Register.jsp' method='post'>
+	<div class="form-group">
+	<label class="col-sm-2 control-label" >名前</label>
+	<div class="col-sm-10">
+	<input type='text' name='name' value='<%= name %>' class="input-xlagrge">
 	<% 
 		if (state == "ERROR" && !nameError.equals("")) {
 			out.print(nameError);
 		}
 	%>
 	</div>
+	</div>
 		
-	<div class="control-group">
-	<label class="control-label">年齢</label>
-	<input type='text' name='yearold' value="<%= yearold %>" class="input-xlagrge"> 
+	<div class="form-group">
+	<label class="col-sm-2 control-label">年齢</label>
+	<div class="col-sm-10">
+	<input type='text' name='yearold' value="<%= yearold %>" class="selectpicker"> 
 	<% 
 		if (state == "ERROR" && !yearoldError.equals("")) {
 			out.print(yearoldError);
 		}
 	%>
 	</div>
+	</div>
 
-	<div class="control-group">
-	<label class="control-label">年</label>
+	<div class="form-group">
+	<label class="col-sm-2 control-label">年</label>
+	<div class="col-sm-10">
 	<select name = 'year' class="selectpicker">
 		<% for (int i = 1970; i <= 2007; i++) {
 			if (Integer.parseInt(year) == i) {
@@ -95,8 +99,11 @@ session.invalidate();
 			}
 		}%>
 	</select> 
-	
-	<label class="control-labe">月</label>
+	</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-2 control-label">月</label>
+	<div class="col-sm-10">
 	<select name = 'month' class="selectpicker">
 		<% for (int i = 1; i <= 12; i++) {
 			if (Integer.parseInt(month) == i) {
@@ -107,8 +114,12 @@ session.invalidate();
 
 		}%>
 	</select>
-	 
-	<label class="control-label">日</label>
+	</div>
+	
+	</div>
+	<div class="form-group">
+	<label class="col-sm-2 control-label">日</label>
+	<div class="col-sm-10">
 	<select name = 'day' class="selectpicker">
 	<% for (int i = 1; i <= 31; i++) {
 		if (Integer.parseInt(day) == i) {
@@ -118,7 +129,8 @@ session.invalidate();
 		}
 
 	} %>
-	</select> 
+	</select>
+	</div> 
 	<% 
 		if (state == "ERROR" && !dateError.equals("")) {
 			out.print(dateError);
@@ -126,8 +138,9 @@ session.invalidate();
 	%>
 	</div>
 
-	<div class="control-group">
-	<label class="control-label">メールアドレス</label>
+	<div class="form-group">
+	<label class="col-sm-2 control-label">メールアドレス</label>
+	<div class="col-sm-10">
 	<input type = 'text' name = 'mailAddress' value="<%= mailAddress%>" class="input-xlarge"> 
 	<% 
 		if (state == "ERROR" && !mailMagazineError.equals("")) {
@@ -135,13 +148,22 @@ session.invalidate();
 		}
 	%>
 	</div>
+	</div>
 	
-	<div class="control-group">
-	<label class="control-label">メルマガ</label>
+	<div class="form-group">
+	<label class="col-sm-2 control-label">メルマガ</label>
+	<div class="col-sm-10">
 	<label class="radio-inline"><input type = 'radio' name = 'mailMagazine' value = 'true' <% if(mailMagazine.equals("true")) out.print("checked"); %>>必要</label>
 	<label class="radio-inline"><input type = 'radio' name = 'mailMagazine' value = 'false' <% if(mailMagazine.equals("false")) out.print("checked"); %>>不要</label>
 	</div>
+	</div>
+	
+	<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
 	<input type = 'submit' class="btn btn-default btn-xs">
+	</div>
+	</div>
+	
 </form>
 
 <jsp:include page="Footer.jsp"/>
