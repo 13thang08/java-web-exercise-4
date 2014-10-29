@@ -6,6 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.css">
+<script src="bootstrap-3.2.0-dist/js/bootstrap.js"></script>
 <title>情報を確認してください</title>
 </head>
 <body>
@@ -14,12 +17,12 @@
 <jsp:setProperty name="entry" property="*"/>
 
 <%-- 入力したデータを表示 --%>
-情報を確認してください　<br><br>
+<label>情報を確認してください</label><br>
 <%= entry %>
 <form action="ProcessRegisterInformation" method="post">
 <br>
-<input type="submit" value="次へ" name="navigate">
-<input type="submit" value="戻る" name="navigate">
+<input type="submit" value="次へ" name="navigate" class="btn btn-default btn-xs">
+<input type="submit" value="戻る" name="navigate" class="btn btn-default btn-xs">
 </form>
 
 </body>
