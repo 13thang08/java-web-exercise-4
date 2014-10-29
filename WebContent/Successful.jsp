@@ -4,11 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.css">
+<script src="bootstrap-3.2.0-dist/js/bootstrap.js"></script>
 <title>登録完了</title>
 </head>
 <body>
-登録しました。
+<label>登録しました!</label>
+<p>
+<jsp:useBean id="entry" class="jp.zyyx.training.renshuu4.InformationBean" scope="session" />
+<%= entry %>
+</p>
 <%session.invalidate(); %>
+
+
 </body>
 
 </html>
