@@ -30,7 +30,7 @@
 		state = session.getAttribute("state").toString();
 	}
 	
-	if (!state.equals("INIT")) {
+	if (state.equals("EDIT") || state.equals("ERROR")) {
 		InformationBean entry = (InformationBean) session.getAttribute("entry");
 		if (entry != null) {
 			name = entry.getName();

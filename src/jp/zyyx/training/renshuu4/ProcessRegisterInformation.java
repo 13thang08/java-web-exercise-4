@@ -48,48 +48,51 @@ public class ProcessRegisterInformation extends HttpServlet {
 		HttpSession session = request.getSession();
 		InformationBean entry = (InformationBean)session.getAttribute("entry");
 		
-		session.setAttribute("state", "VALID");
-		
-		// ユーザが編集したいなら、入力するページに戻る
-		if (request.getParameter("navigate").equals("戻る")) {
-			session.setAttribute("state", "EDIT");
-			request.getRequestDispatcher("Register-Form.jsp").forward(request, response);
-		}
-		
 		if (entry == null) {
 			session.setAttribute("state", "INIT");
 			response.sendRedirect("Register-Form.jsp");
 			return;
 		}
 		
-		// エラーがあれば、エラーメッセージを作ります
-		if (entry.getName() == null || entry.getName().trim().length() == 0) {
-			session.setAttribute("state", "ERROR");
-			session.setAttribute("nameError", "名前を入力してください");
+		session.setAttribute("state", "VALID");
+		
+		// ユーザが編集したいなら、入力するページに戻る
+		if (request.getParameter("navigate").equals("戻る")) {
+			session.setAttribute("state", "EDIT");
+			request.getRequestDispatcher("Register-Form.jsp").forward(request, response);
+			return;
+		}
+		
+		if (request.getParameter("navigate").equals("次へ")) {
+			// エラーがあれば、エラーメッセージを作ります
+			if (entry.getName() == null || entry.getName().trim().length() == 0) {
+				session.setAttribute("state", "ERROR");
+				session.setAttribute("nameError", "名前を入力してください");
+				
+			}
 			
-		}
-		
-		if (entry.getYearold() == null || !isValidYearold(entry.getYearold())) {
-			session.setAttribute("state", "ERROR");
-			session.setAttribute("yearoldError", "正しい年齢を入力してください");
-		}
-		
-		if (!isDateValid(entry.getYear(), entry.getMonth(), entry.getDay())) {
-			session.setAttribute("state", "ERROR");
-			session.setAttribute("dateError", "正しい年月日を入力してください");
-		}
-		
-		if ((entry.getMailAddress() == null || entry.getMailAddress().trim().length() == 0) && entry.isMailMagazine()) {
-			session.setAttribute("state", "ERROR");
-			session.setAttribute("mailMagazineError", "メールを入力してください");
-		}
-		
-		if (session.getAttribute("state").toString().equals("ERROR")) {
-			response.sendRedirect("Register-Form.jsp");
-			return;
-		} else {
-			response.sendRedirect("Successful.jsp");
-			return;
+			if (entry.getYearold() == null || !isValidYearold(entry.getYearold())) {
+				session.setAttribute("state", "ERROR");
+				session.setAttribute("yearoldError", "正しい年齢を入力してください");
+			}
+			
+			if (!isDateValid(entry.getYear(), entry.getMonth(), entry.getDay())) {
+				session.setAttribute("state", "ERROR");
+				session.setAttribute("dateError", "正しい年月日を入力してください");
+			}
+			
+			if ((entry.getMailAddress() == null || entry.getMailAddress().trim().length() == 0) && entry.isMailMagazine()) {
+				session.setAttribute("state", "ERROR");
+				session.setAttribute("mailMagazineError", "メールを入力してください");
+			}
+			
+			if (session.getAttribute("state").toString().equals("ERROR")) {
+				response.sendRedirect("Register-Form.jsp");
+				return;
+			} else {
+				response.sendRedirect("Successful.jsp");
+				return;
+			}
 		}
 		
 	}
